@@ -51,8 +51,8 @@ class PasswordGenerator:
     def generate_password(self):
         try:
             length = int(self.length_var.get())
-            if length <= 0:
-                messagebox.showerror("Error", "Password length must be greater than zero.")
+            if length <= 7:
+                messagebox.showerror("Error", "Password length must be greater than seven.")
                 return
         except ValueError:
             messagebox.showerror("Error", "Invalid password length.")
