@@ -1,0 +1,20 @@
+import tkinter as tk
+
+# Create the main window
+root = tk.Tk()
+root.title("Tkinter Grid Resize Example")
+
+# Create a 3x3 grid
+for i in range(3):
+    root.grid_rowconfigure(i, weight=1)  # Allow rows to expand
+    root.grid_columnconfigure(i, weight=1)  # Allow columns to expand
+
+# Create buttons in the grid
+for i in range(3):
+    for j in range(3):
+        button_text = f"Button {i+1}-{j+1}"
+        button = tk.Button(root, text=button_text, padx=10, pady=10)
+        button.grid(row=i, column=j, sticky="nsew")  # Make the buttons expand with the grid
+
+# Start the Tkinter event loop
+root.mainloop()

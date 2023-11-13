@@ -22,4 +22,4 @@ def get_temperature(unit):
         return data_dict["current"]["temp_c"],data_dict["current"]["feelslike_c"]
     elif unit=="f":
         return data_dict["current"]["temp_f"],data_dict["current"]["feelslike_f"]
-print(get_temperature("c"))
+

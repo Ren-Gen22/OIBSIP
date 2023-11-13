@@ -20,14 +20,15 @@ def calculate_bmi():
             stat = "Overweight"
         else:
             stat = "Obese"
-
+        result_text.config(state=NORMAL)
         result_text.delete(1.0, END)  
         result_text.insert(END, f'Result\nYour BMI: {bmi:.2f}\nStatus: {stat}')
-
+        result_text.config(state=DISABLED)
     except ValueError:
+        result_text.config(state=NORMAL)
         result_text.delete(1.0, END)  
         result_text.insert(END, "Error: Please enter valid numeric values for weight and height.")
-
+        result_text.config(state=DISABLED)
 root = Tk()
 root.title("BMI Calculator")
 
@@ -49,7 +50,8 @@ e2.grid(row=2, column=1, pady=5, sticky=W)
 calculate_button = Button(root, text="Calculate BMI", command=calculate_bmi)
 calculate_button.grid(row=3, column=0, pady=10, columnspan=3)
 
-result_text = Text(root, height=5, width=30)
+
+result_text = Text(root, height=5, width=30,state= DISABLED)
 result_text.grid(row=4, column=0, pady=5, columnspan=3, sticky=W)
 
 mainloop()
