@@ -9,24 +9,14 @@ def disp_weather():
     location=e1.get()
     unit=v.get()
     url=fw.get_icon()
-    url="https:"+url
     new_window = Toplevel(root)
     new_window.geometry("300x200")
     new_window.title("New Window")
+    split_url=url.split("/")
+    time=split_url[len(split_url)-2]
+    logo=split_url[len(split_url)-1]
     
-    response = requests.get(url)
-    img_data = BytesIO(response.content)
-    img = Image.open(img_data)
-    wImg = ImageTk.PhotoImage(img)
-    imag = Label(new_window, image=wImg).grid(row=0,column=0)
-    #imag.photo = wImg
-    #imag.pack()
-    #final.config(text="hello")
-    # result_text.config(state=NORMAL)
-    # result_text.delete(1.0, END)  
-    # result_text.insert(END, 'helo')
-    # result_text.config(state=DISABLED)
-#print(fw.get_temperature("c"))
+
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 icon_path = os.path.join(script_dir, "weather/weather.ico")
@@ -50,7 +40,4 @@ Radiobutton(root, text='Fahrenheit', variable=v, value=2).grid(row=1, column=2, 
 fetch_button = Button(root, text="Find", command=disp_weather)
 fetch_button.grid(row=3, column=0, pady=10, columnspan=3)
 
-#result_text = Text(root, height=2, width=20,state= DISABLED)
-# final=Label(root,text='')
-# final.grid(row=4, column=0, pady=5, sticky=W)
 mainloop()
