@@ -17,6 +17,7 @@ class Weatherify:
         else:
             print(f"Error: {response.status_code}")
 
+
     def get_condition(self):
         return self.data_dict["current"]["condition"]["text"]
 
@@ -30,8 +31,3 @@ class Weatherify:
             return self.data_dict["current"]["temp_f"], self.data_dict["current"]["feelslike_f"]
 
 
-# location = "Chennai"
-# weather = Weatherify(location)
-# print(weather.get_condition())
-# print(weather.get_icon())
-# print(weather.get_temperature(0))

@@ -1,10 +1,12 @@
-import fetch_weather as fw
+from fetch_weather import Weatherify
 from tkinter import *
 import os
 from PIL import Image, ImageTk
+
+
 def current_dir(a,b="",c=""):
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    if b!="":
+    if b!="" and c!="":
         icon_path = os.path.join(script_dir, a,b,c)
     else:
         icon_path = os.path.join(script_dir, a)    
@@ -13,32 +15,38 @@ def current_dir(a,b="",c=""):
 
 def disp_weather():
     location=e1.get()
+    fw=Weatherify(location)
     unit=v.get()
+    tu="°C"
+    if unit==1:tu="°F"
     url=fw.get_icon()
-    conditon=fw.get_conditon()
+    conditon=fw.get_condition()
     Temp,feelTemp=fw.get_temperature(unit)
     split_url=url.split("/")
     time=split_url[len(split_url)-2] 
     logo=split_url[len(split_url)-1]
     wImg=current_dir("weatherImg",time,logo)
-    #print(wImg)
 
     image_window = Toplevel(root)
-    image_window.geometry("300x300")
+    image_window.geometry("200x200")
+
+    location_label = Label(image_window, text="Weather at " + location+":")
+    location_label.grid(row=0, column=0, columnspan=2)
+
     img = Image.open(wImg)
     img = ImageTk.PhotoImage(img)
-    image = Label(image_window, image=img)
-    image.image = img  
-    image.pack(side=TOP)
+    image_label = Label(image_window, image=img)
+    image_label.image = img
+    image_label.grid(row=1, column=1, columnspan=2)
 
-    Label(image_window,text=conditon).pack(side=TOP)
-    Label(image_window,text=Temp).pack(side=TOP)
-    Label(image_window,text=feelTemp).pack(side=TOP)
+    Label(image_window, text="Weather :").grid(row=2, column=0)
+    Label(image_window, text=conditon).grid(row=2, column=1)
+    Label(image_window, text="Temperature :").grid(row=3, column=0)
+    Label(image_window, text=str(Temp)+tu).grid(row=3, column=1)
+    Label(image_window, text="Feels Like :").grid(row=4, column=0)
+    Label(image_window, text=str(feelTemp)+tu).grid(row=4, column=1)
 
-
-
-
-
+ 
 
 icon_path=current_dir("weatherImg/weather.ico")
 root = Tk()
