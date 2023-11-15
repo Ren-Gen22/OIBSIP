@@ -52,7 +52,7 @@ icon_path=current_dir("weatherImg/weather.ico")
 root = Tk()
 root.title("Weather")
 root.iconbitmap(default=icon_path)
-root.geometry("400x100")
+root.geometry("340x100")
 
 Label(root, text='Enter the Location:').grid(row=0, column=0, pady=4, sticky=W)
 
