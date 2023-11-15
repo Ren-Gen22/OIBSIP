@@ -1,7 +1,9 @@
-from fetch_weather import Weatherify
+#from fetch_weather import Weatherify
+import fetch_weather 
 from tkinter import *
 import os
 from PIL import Image, ImageTk
+
 
 
 def current_dir(a,b="",c=""):
@@ -15,7 +17,7 @@ def current_dir(a,b="",c=""):
 
 def disp_weather():
     location=e1.get()
-    fw=Weatherify(location)
+    fw=fetch_weather.Weatherify(location)
     unit=v.get()
     tu="°C"
     if unit==1:tu="°F"
@@ -46,7 +48,10 @@ def disp_weather():
     Label(image_window, text="Feels Like :").grid(row=4, column=0)
     Label(image_window, text=str(feelTemp)+tu).grid(row=4, column=1)
 
- 
+def auto_weather():
+    e1.delete(0, END)
+    loc=fetch_weather.get_location()
+    e1.insert(0, loc)
 
 icon_path=current_dir("weatherImg/weather.ico")
 root = Tk()
@@ -54,7 +59,7 @@ root.title("Weather")
 root.iconbitmap(default=icon_path)
 root.geometry("340x100")
 
-Label(root, text='Enter the Location:').grid(row=0, column=0, pady=4, sticky=W)
+Label(root, text='Enter the Location :').grid(row=0, column=0, pady=4, sticky=W)
 
 e1 = Entry(root)
 e1.grid(row=0, column=1, pady=5, sticky=W)
@@ -65,6 +70,9 @@ Radiobutton(root, text='Celsius', variable=v, value=0).grid(row=1, column=1, pad
 Radiobutton(root, text='Fahrenheit', variable=v, value=1).grid(row=1, column=2, pady=4, sticky=W)
 
 fetch_button = Button(root, text="Find", command=disp_weather)
-fetch_button.grid(row=3, column=0, pady=10, columnspan=3)
+fetch_button.grid(row=2, column=0, pady=10, columnspan=2)
+
+auto_button = Button(root, text="Locate Me", command=auto_weather)
+auto_button.grid(row=2, column=1, pady=10, columnspan=2)
 
 mainloop()

@@ -30,4 +30,9 @@ class Weatherify:
         elif unit == 1:
             return self.data_dict["current"]["temp_f"], self.data_dict["current"]["feelslike_f"]
 
-
+    
+def get_location():
+    ip_address = requests.get('https://api64.ipify.org?format=json').json()["ip"]
+    response = requests.get(f'https://ipapi.co/{ip_address}/json/').json()
+    city =response.get("city"),    
+    return city
